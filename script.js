@@ -1,33 +1,30 @@
-let input = document.querySelector(".email-type");
-let form = document.querySelector(".form");
-let error = document.querySelector(".error");
-let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const form = document.getElementById("form");
+const email = document.getElementById("email");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if (input.value.match(pattern)) {
-        input.value = input.value;
-        input.style.borderColor = "hsl(223, 87%, 63%)";
-
-        setTimeout(() => {
-            input.style.borderColor = "hsl(209, 33%, 12%)";
-            input.value = "";
-            input.placeholder = "Your email address...";
-            error.classList.remove("show");
-        }, 2000);
-    } else {
-        input.value = input.value;
-        input.style.borderColor = "hsl(354, 100%, 66%)";
-        error.style.color = "hsl(354, 100%, 66%)";
-        error.textContent = "Please provide valid email address";
-        error.classList.add("show");
-
-        setTimeout(() => {
-            input.style.borderColor = "hsl(209, 33%, 12%)";
-            input.value = "";
-            input.placeholder = "Your email address...";
-            error.classList.remove("show");
-        }, 2000);
-    }
+    validateInputs();
 });
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector(".error");
+
+    errorDisplay.innerText = message;
+    inputControl.classList.add("error");
+    document.querySelector("input").style.borderColor = "hsl(354, 100%, 66%)";
+};
+
+const isValidEmail = email => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+};
+
+const validateInputs = () => {
+    const emailValue = email.value.trim();
+
+    if (emailValue === "") {
+        setError(email, "Please provide a valid email address");
+    }
+};

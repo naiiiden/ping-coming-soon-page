@@ -125,6 +125,23 @@ form #submit:hover {
   transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
 }
 
+form .email-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.25rem;
+}
+
+form .email-box small {
+  color: #ff5263;
+  font-size: .6em;
+  text-align: center;
+}
+
 .socials {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -192,6 +209,9 @@ form #submit:hover {
         -ms-flex-align: center;
             align-items: center;
   }
+  form .email-box.error input {
+    border-color: #ff5263;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -203,6 +223,18 @@ form #submit:hover {
   }
   form button {
     width: 10%;
+  }
+  form .email-box {
+    gap: .5rem;
+    position: relative;
+  }
+  form .email-box small {
+    font-size: .7em;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+    position: absolute;
+    bottom: -40%;
+    left: 5%;
   }
 }
 /*# sourceMappingURL=style.css.map */
